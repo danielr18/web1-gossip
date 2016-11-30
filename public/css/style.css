@@ -1,0 +1,20 @@
+body .login .alias {
+  height: auto;
+  font-size: 26px;
+  margin: 20px auto; }
+  body .login .alias:focus {
+    border-color: #145BD5; }
+
+body .login .role.button {
+  font-size: 24px;
+  padding: 15px;
+  border-width: 4px;
+  height: auto; }
+  body .login .role.button.active {
+    border: 4px solid #145BD5; }
+
+body .login #login-btn {
+  margin-top: 20px;
+  font-size: 20px;
+  height: auto;
+  padding: 10px; }

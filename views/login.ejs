@@ -1,0 +1,36 @@
+<% include head %>
+
+<body>
+  <section class="hero is-fullheight is-primary login">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h3 class="title is-2">
+          <span class="icon is-large">
+            <i class="fa fa-comment"></i>
+          </span>
+          <br>
+          Start
+          <strong>sharing gossips</strong>.
+        </h3>
+        <br>
+        <h4 class="subtitle is-4">Enter your Alias:</h4>
+        <div class="columns">
+          <input class="input alias has-text-centered column is-offset-4 is-4" id="alias-input" type="text" placeholder="MontiGod">
+        </div>
+        <h4 class="subtitle is-4">Pick your role:</h4>
+        <div class="columns">
+          <div class="column is-offset-one-quarter is-half">
+            <button class="button role active" id="gossiper-role-btn" name="button">Gossiper</button>
+            <button class="button role" id="admin-role-btn" name="button">Admin</button>
+          </div>
+        </div>
+        <div class="columns">
+            <button class="button column is-offset-4 is-4 is-info is-disabled" id="login-btn" name="button">Login</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <script src="/js/login.js" charset="utf-8"></script>
+</body>
+</html>

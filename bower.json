@@ -1,0 +1,9 @@
+{
+  "name": "web1-gossip",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}

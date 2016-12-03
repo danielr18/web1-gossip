@@ -1,7 +1,57 @@
 @import "node_modules/bulma/sass/utilities/variables";
 @import "palette.scss";
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 body {
+  .nav {
+    .brand-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 22px;
+      color: $primary;
+    }
+  }
+
+  .underline {
+    height: 2px;
+    margin-left: 4px;
+  }
+
+  .section.home {
+    background-color: inherit;
+
+    .gossips-section {
+      .title {
+        margin-bottom: 9px;
+        .icon {
+          line-height: 29px;
+        }
+      }
+
+      &.hot-gossips {
+        .title {
+          color: $orange;
+        }
+        .underline {
+          background-color: $orange;
+        }
+      }
+
+      &.new-gossips {
+        .title {
+          color: $blue;
+        }
+        .underline {
+          background-color: $blue;
+        }
+      }
+
+      .gossips-wrapper {
+        margin-top: 10px;
+      }
+
+    }
+  }
+
   .login {
     .alias {
       height: auto;
@@ -32,12 +82,44 @@ body {
     }
   }
 
-  .home {
-    .gossip {
-      border-radius: 2px;
-      border: 0.5px solid black;
-    }
+  .gossip {
+    background-color: white;
+    text-align: left;
 
+    .gossip-wrapper {
+      display: flex;
+
+      .gossip-karma-wrapper {
+        flex: 0 0 50px;
+        display: flex;
+        flex-direction: column;
+
+        .karma-wrapper,
+        .vote-wrapper {
+          flex: 1 0 auto;
+          display: flex;
+          margin: 0 auto;
+
+          a {
+            flex: 1;
+            margin: auto;
+
+            .icon {
+              width: 13px;
+            }
+          }
+
+          .karma {
+            flex: 1;
+            margin: auto;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .home {
     #gossip-text {
       width: 100%;
     }

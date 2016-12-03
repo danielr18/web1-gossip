@@ -1,6 +1,6 @@
 const gossipPushButton = document.querySelector('#gossip-push-button');
 const gossipText = document.querySelector('#gossip-text');
-const gossipArea = document.querySelector('#gossip-area')
+const gossipArea = document.querySelector('#hot-gossips')
 var gossipArray = [];
 
 function pushGossip() {

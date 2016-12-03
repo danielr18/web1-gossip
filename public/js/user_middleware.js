@@ -1,4 +1,5 @@
-let user;
+var user = localStorage.user && JSON.parse(localStorage.user);
+
 const userRoutes = [
   /^\/home$/,
   /^\/user\/[a-zA-Z0-9_]+$/,
@@ -9,8 +10,6 @@ const adminRoutes = [
   /^\/admin$/,
   /^\/logs$/,
 ];
-
-user = localStorage.user && JSON.parse(localStorage.user);
 
 if (user) {
   if (user.admin) {

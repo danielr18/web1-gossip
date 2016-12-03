@@ -11,6 +11,10 @@ router.get('/home', function(req, res) {
   res.render('home');
 });
 
+router.get('/admin', function(req, res) {
+  res.render('admin');
+});
+
 router.get('/profile', function(req, res) {
   res.render('profile');
 });
@@ -39,11 +43,5 @@ router.post('/gossip/create', function(req, res) {
   });
 });
 
-router.post('/secret', function(req, res) {
-  let data = req.body;
-  ejs.renderFile('views/gossip.ejs', data, function(err, str) {
-    res.send(str);
-  });
-});
 
 module.exports = router;

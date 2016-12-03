@@ -62,12 +62,23 @@ body .gossip {
         flex: 1 0 auto;
         display: flex;
         margin: 0 auto; }
-        body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper a,
-        body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper a {
+        body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button,
+        body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button {
+          background-color: Transparent;
+          background-repeat: no-repeat;
+          border: none;
+          cursor: pointer;
+          overflow: hidden;
+          outline: none;
+          color: #00d1b2;
+          transition: none 86ms ease-out;
           flex: 1;
           margin: auto; }
-          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper a .icon,
-          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper a .icon {
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button:hover,
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button:hover {
+            color: #363636; }
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button .icon,
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button .icon {
             width: 13px; }
         body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper .gossip-karma,
         body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper .gossip-karma {

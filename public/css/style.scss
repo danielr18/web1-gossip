@@ -104,7 +104,20 @@ body {
           display: flex;
           margin: 0 auto;
 
-          a {
+          button {
+            background-color: Transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+            color: #00d1b2;
+            transition: none 86ms ease-out;
+
+            &:hover {
+              color: #363636;
+            }
+
             flex: 1;
             margin: auto;
 
@@ -126,5 +139,4 @@ body {
       }
     }
   }
-
 }

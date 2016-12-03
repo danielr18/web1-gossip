@@ -1,29 +1,58 @@
 const gossipPushButton = document.querySelector('#gossip-push-button');
 const gossipText = document.querySelector('#gossip-text');
-const gossipArea = document.querySelector('#hot-gossips')
+const hotGossips = document.querySelector('#hot-gossips');
+const newGossips = document.querySelector('#new-gossips');
 var gossipArray = [];
 
+function onGossipUpdate(oldGossip, newGossip) {
+  const gossipElems = document.querySelectorAll(`[gossip_id="${newGossip.id_gossip}"]`);
+  gossipElems.forEach((gossipElem) => {
+    const karma = gossipElem.querySelector('.gossip-karma');
+    const description = gossipElem.querySelector('.gossip-description');
+    karma.textContent = newGossip.karma;
+    description.textContent = newGossip.description;
+    if (gossipElem.parentNode.id == 'hot-gossips') {
+      const previousSiblingKarma = (gossipElem.previousElementSibling) ? parseInt(gossipElem.previousElementSibling.querySelector('.gossip-karma').textContent) : Number.POSITIVE_INFINITY;
+      const nextSiblingKarma = (gossipElem.nextElementSibling) ? parseInt(gossipElem.nextElementSibling.querySelector('.gossip-karma').textContent) : Number.NEGATIVE_INFINITY;
+      if (newGossip.karma > previousSiblingKarma) {
+        gossipElem.parentNode.insertBefore(gossipElem, gossipElem.previousElementSibling);
+      } else if (newGossip.karma < nextSiblingKarma) {
+        gossipElem.parentNode.insertBefore(gossipElem.nextElementSibling, gossipElem);
+      }
+    }
+  });
+}
+
 function pushGossip() {
-  const gossip = new Gossip('A', gossipText.value)
+  const gossip = new Gossip('a', gossipText.value);
+
+  gossip.onUpdate = onGossipUpdate;
+
   gossipArray.push(gossip);
-  const XHR = new XMLHttpRequest();
-  XHR.open('post', 'http://dildo/gossip/create', true);
 
-  XHR.onload = function(response) {
-    console.log(response);
-  };
-
-  XHR.setRequestHeader('Content-type', 'application/json');
-  //XHR.send(gossip);
-  render();
+  gossip.post()
+    .then(function() {
+      render();
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 function render() {
-  while (gossipArea.firstChild) {
-    gossipArea.removeChild(gossipArea.firstChild);
+  while (hotGossips.firstChild) {
+    hotGossips.removeChild(hotGossips.firstChild);
   }
+  while (newGossips.firstChild) {
+    newGossips.removeChild(newGossips.firstChild);
+  }
+  gossipArray.sort((g1, g2) => g2.karma - g1.karma);
   gossipArray.forEach(function(gossip, index) {
-    gossipArea.appendChild(gossip.render());
+    hotGossips.appendChild(gossip.render());
+  });
+  gossipArray.sort((g1, g2) => g2.date.getTime() - g1.date.getTime());
+  gossipArray.forEach(function(gossip, index) {
+    newGossips.appendChild(gossip.render());
   });
 
 }

@@ -1,8 +1,45 @@
 <% include head %>
 
-<body>
-  <% include header %>
-  Hi
-  <% include footer %>
-</body>
-</html>
+  <body>
+    <% include header %>
+      <section class="hero is-fullheight home">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <section class="tile is-child section">
+                  <div class="columns">
+                    <div class="column" id="gossip-area">
+                    </div>
+                    <div class="column">
+                      <div class="tile is-vertical is-parent">
+                        <div class="tile is-child box">
+                          <div class="form-group">
+                            <span class="title">Heard a sweet thing?!</span>
+                            <br>
+                            <br>
+                            <textarea class="form-control" id="gossip-text" rows="6"></textarea>
+                            <br>
+                            <button class="button is-primary" type="button" name="button" id="gossip-push-button">Gossip!</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </section>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+      <% include footer %>
+        <script type="text/javascript" src="/js/home.js"></script>
+        </script>
+  </body>
+
+  </html>

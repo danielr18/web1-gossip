@@ -2,7 +2,6 @@
 @import "palette.scss";
 
 body {
-
   .login {
     .alias {
       height: auto;
@@ -30,6 +29,21 @@ body {
       font-size: 20px;
       height: auto;
       padding: 10px;
+    }
+  }
+
+  .home {
+    .gossip {
+      border-radius: 2px;
+      border: 0.5px solid black;
+    }
+
+    #gossip-text {
+      width: 100%;
+    }
+
+    #cont {
+      word-break: break-all;
     }
   }
 }

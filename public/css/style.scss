@@ -1,6 +1,6 @@
 @import "node_modules/bulma/sass/utilities/variables";
 @import "palette.scss";
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url( 'https://fonts.googleapis.com/css?family=Pacifico');
 
 body {
   .nav {
@@ -22,6 +22,7 @@ body {
     .gossips-section {
       .title {
         margin-bottom: 9px;
+
         .icon {
           line-height: 29px;
         }
@@ -31,6 +32,7 @@ body {
         .title {
           color: $orange;
         }
+
         .underline {
           background-color: $orange;
         }
@@ -40,6 +42,7 @@ body {
         .title {
           color: $blue;
         }
+
         .underline {
           background-color: $blue;
         }
@@ -48,7 +51,6 @@ body {
       .gossips-wrapper {
         margin-top: 10px;
       }
-
     }
   }
 
@@ -85,6 +87,8 @@ body {
   .gossip {
     background-color: white;
     text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 
     .gossip-wrapper {
       display: flex;
@@ -118,7 +122,7 @@ body {
       }
 
       .gossip-description {
-          word-break: break-word;
+        word-break: break-word;
       }
     }
   }
@@ -133,9 +137,11 @@ body {
     }
   }
 }
-.footer{
+
+.footer {
   color: whitesmoke;
 }
-.nav{
+
+.nav {
   background-color: whitesmoke;
 }

@@ -12,8 +12,8 @@ function onGossipUpdate(oldGossip, newGossip) {
     karma.textContent = newGossip.karma;
     description.textContent = newGossip.description;
     if (gossipElem.parentNode.id == 'hot-gossips') {
-      const previousSiblingKarma = (gossipElem.previousElementSibling) ? parseInt(gossipElem.previousElementSibling.querySelector('.gossip-karma').textContent) : Number.POSITIVE_INFINITY;
-      const nextSiblingKarma = (gossipElem.nextElementSibling) ? parseInt(gossipElem.nextElementSibling.querySelector('.gossip-karma').textContent) : Number.NEGATIVE_INFINITY;
+      const previousSiblingKarma = (gossipElem.previousElementSibling) ? parseInt(gossipElem.previousElementSibling.querySelector('.gossip-karma').textContent) : gossipElem.karma;
+      const nextSiblingKarma = (gossipElem.nextElementSibling) ? parseInt(gossipElem.nextElementSibling.querySelector('.gossip-karma').textContent) : gossipElem.karma;
       if (newGossip.karma > previousSiblingKarma) {
         gossipElem.parentNode.insertBefore(gossipElem, gossipElem.previousElementSibling);
       } else if (newGossip.karma < nextSiblingKarma) {

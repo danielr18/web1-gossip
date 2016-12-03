@@ -28,7 +28,6 @@ router.post('/gossip/down', function(req, res) {
 });
 
 router.post('/gossip/create', function(req, res) {
-  console.log('aa');
   count++;
   res.send({
     message: 'Good',

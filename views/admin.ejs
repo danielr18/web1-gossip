@@ -1,0 +1,45 @@
+<% include head %>
+
+<body>
+  <% include header %>
+  <section class="section home main">
+    <div class="container">
+      <div class="columns">
+        <div class="column gossips-section all-gossips">
+          <h3 class="title">
+            <span class="icon">
+              <i class="fa fa-comment"></i>
+            </span>
+            All
+          </h3>
+          <div class="underline"></div>
+          <div class="gossips-wrapper" id="all-gossips"></div>
+        </div>
+        <div class="column gossips-section deleted-gossips">
+          <h3 class="title">
+            <span class="icon">
+              <i class="fa fa-trash"></i>
+            </span>
+            Deleted
+          </h3>
+          <div class="underline"></div>
+          <div class="gossips-wrapper" id="deleted-gossips"></div>
+        </div>
+        <div class="column">
+          <div class="form-group">
+            <span class="title">Heard a sweet thing?!</span>
+            <br>
+            <br>
+            <textarea class="form-control" id="gossip-text" rows="6"></textarea>
+            <br>
+            <button class="button is-primary" type="button" name="button" id="gossip-push-button">Gossip!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% include footer %>
+  <script type="text/javascript" src="/js/components/Gossip.js"></script>
+  <script type="text/javascript" src="/js/admin.js"></script>
+</body>
+</html>

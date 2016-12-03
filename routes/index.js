@@ -14,6 +14,11 @@ router.get('/login', function(req, res) {
   res.render('login');
 });
 
+router.post('/gossip/create', function(req, res) {
+  console.log('aa');
+  res.send({message: 'Good'});
+});
+
 router.post('/secret', function(req, res) {
   let data = req.body;
   ejs.renderFile('views/gossip.ejs', data, function(err, str) {

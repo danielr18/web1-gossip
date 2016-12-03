@@ -67,11 +67,13 @@ body .gossip {
           body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper a .icon,
           body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper a .icon {
             width: 13px; }
-        body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper .karma,
-        body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper .karma {
+        body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper .gossip-karma,
+        body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper .gossip-karma {
           flex: 1;
           margin: auto;
           font-weight: 600; }
+    body .gossip .gossip-wrapper .gossip-description {
+      word-break: break-word; }
 
 body .home #gossip-text {
   width: 100%; }

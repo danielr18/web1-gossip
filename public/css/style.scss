@@ -109,12 +109,16 @@ body {
             }
           }
 
-          .karma {
+          .gossip-karma {
             flex: 1;
             margin: auto;
             font-weight: 600;
           }
         }
+      }
+
+      .gossip-description {
+          word-break: break-word;
       }
     }
   }

@@ -24,7 +24,8 @@ function onGossipUpdate(oldGossip, newGossip) {
 }
 
 function pushGossip() {
-  const gossip = new Gossip('a', gossipText.value);
+  const user = localStorage.user && JSON.parse(localStorage.user);
+  const gossip = new Gossip(user.name, gossipText.value);
 
   gossip.onUpdate = onGossipUpdate;
 

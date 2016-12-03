@@ -15,8 +15,16 @@ router.get('/admin', function(req, res) {
   res.render('admin');
 });
 
-router.get('/profile', function(req, res) {
-  res.render('profile');
+router.get('/user/:user', function(req, res) {
+  res.render('user', {user: req.params.user});
+});
+
+router.get('/search', function(req, res) {
+  res.render('search');
+});
+
+router.get('/logs', function(req, res) {
+  res.render('logs');
 });
 
 router.get('/login', function(req, res) {

@@ -2,35 +2,46 @@
 body .nav #brand-title {
   font-family: 'Pacifico', cursive;
   font-size: 22px;
-  color: #00d1b2; }
+  color: #00d1b2;
+  user-select: none; }
 
 body .underline {
   height: 2px;
   margin-left: 4px; }
 
-body .section.home {
+body .main {
   background-color: inherit; }
-  body .section.home .gossips-section .title {
+  body .main #gossip-text {
+    width: 100%;
+    resize: none;
+    padding: 10px;
+    color: grey;
+    font-size: 16px; }
+  body .main #gossip-push-button {
+    text-align: center;
+    display: inherit;
+    margin: 0 auto; }
+  body .main .gossips-section .title {
     margin-bottom: 9px; }
-    body .section.home .gossips-section .title .icon {
+    body .main .gossips-section .title .icon {
       line-height: 29px; }
-  body .section.home .gossips-section.hot-gossips .title {
+  body .main .gossips-section.hot-gossips .title {
     color: #ff470f; }
-  body .section.home .gossips-section.hot-gossips .underline {
+  body .main .gossips-section.hot-gossips .underline {
     background-color: #ff470f; }
-  body .section.home .gossips-section.new-gossips .title {
+  body .main .gossips-section.new-gossips .title {
     color: #145BD5; }
-  body .section.home .gossips-section.new-gossips .underline {
+  body .main .gossips-section.new-gossips .underline {
     background-color: #145BD5; }
-  body .section.home .gossips-section.all-gossips .title {
+  body .main .gossips-section.all-gossips .title {
     color: #00d1b2; }
-  body .section.home .gossips-section.all-gossips .underline {
+  body .main .gossips-section.all-gossips .underline {
     background-color: #00d1b2; }
-  body .section.home .gossips-section.deleted-gossips .title {
+  body .main .gossips-section.deleted-gossips .title {
     color: #ff3860; }
-  body .section.home .gossips-section.deleted-gossips .underline {
+  body .main .gossips-section.deleted-gossips .underline {
     background-color: #ff3860; }
-  body .section.home .gossips-section .gossips-wrapper {
+  body .main .gossips-section .gossips-wrapper {
     margin-top: 10px; }
 
 body .login .alias {

@@ -2,7 +2,7 @@
 
 <body>
   <% include header %>
-  <section class="section home main">
+  <section class="section admin main">
     <div class="container">
       <div class="columns">
         <div class="column gossips-section all-gossips">
@@ -26,11 +26,11 @@
           <div class="gossips-wrapper" id="deleted-gossips"></div>
         </div>
         <div class="column">
-          <div class="form-group">
+          <div class="box form-group">
             <span class="title">Heard a sweet thing?!</span>
             <br>
             <br>
-            <textarea class="form-control" id="gossip-text" rows="6"></textarea>
+            <textarea class="form-control" id="gossip-text" rows="6" maxlength="140" placeholder="Lascars will never publish the API."></textarea>
             <br>
             <button class="button is-primary" type="button" name="button" id="gossip-push-button">Gossip!</button>
           </div>

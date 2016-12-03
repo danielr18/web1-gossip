@@ -6,6 +6,21 @@ const logoutBtn = document.querySelector('#logout-btn');
 const userName = document.querySelector('#user-name');
 var user = localStorage.user && JSON.parse(localStorage.user);
 
+if (user.admin) {
+  const tabs = document.querySelector('#nav-tabs');
+  const logsTab = document.createElement('a');
+  logsTab.className = 'nav-item is-tab';
+  logsTab.id = 'logs-tab';
+  logsTab.onclick = onLogsTabClick;
+  const i = document.createElement('i');
+  i.className = 'fa fa-file-o';
+  const span = document.createElement('span');
+  span.textContent = '\xa0 Logs';
+  logsTab.appendChild(i);
+  logsTab.appendChild(span);
+  tabs.appendChild(logsTab);
+}
+
 function onLogoClick() {
     if(user.admin) {
       location.href = '/admin';
@@ -13,6 +28,10 @@ function onLogoClick() {
     else {
       location.href = '/home';
     }
+}
+
+function onLogsTabClick() {
+  location.href = '/logs';
 }
 
 function onHomeTabClick() {

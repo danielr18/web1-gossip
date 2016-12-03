@@ -4,7 +4,7 @@
 
 body {
   .nav {
-    .brand-title {
+    #brand-title {
       font-family: 'Pacifico', cursive;
       font-size: 22px;
       color: $primary;
@@ -45,6 +45,26 @@ body {
 
         .underline {
           background-color: $blue;
+        }
+      }
+
+      &.all-gossips {
+        .title {
+          color: $primary;
+        }
+
+        .underline {
+          background-color: $primary;
+        }
+      }
+
+      &.deleted-gossips {
+        .title {
+          color: $red;
+        }
+
+        .underline {
+          background-color: $red;
         }
       }
 

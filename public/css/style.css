@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
-body .nav .brand-title {
+body .nav #brand-title {
   font-family: 'Pacifico', cursive;
   font-size: 22px;
   color: #00d1b2; }
@@ -22,6 +22,14 @@ body .section.home {
     color: #145BD5; }
   body .section.home .gossips-section.new-gossips .underline {
     background-color: #145BD5; }
+  body .section.home .gossips-section.all-gossips .title {
+    color: #00d1b2; }
+  body .section.home .gossips-section.all-gossips .underline {
+    background-color: #00d1b2; }
+  body .section.home .gossips-section.deleted-gossips .title {
+    color: #ff3860; }
+  body .section.home .gossips-section.deleted-gossips .underline {
+    background-color: #ff3860; }
   body .section.home .gossips-section .gossips-wrapper {
     margin-top: 10px; }
 

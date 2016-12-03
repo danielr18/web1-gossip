@@ -29,20 +29,18 @@ function render() {
     gossipArea.removeChild(gossipArea.firstChild);
   }
   gossipArray.forEach(function(data, index) {
-
-    let XHR = new XMLHttpRequest();
-    XHR.open('post', 'http://localhost:3000/secret', true);
-
-    XHR.onload = function(response) {
-      let div = document.createElement('div');
-      div.innerHTML = response.target.response;
-      gossipArea.appendChild(div);
-    };
-
-    XHR.setRequestHeader('Content-type', 'application/json');
-    XHR.send(JSON.stringify(data));
-
+    let content;
+    let div = document.createElement('div');
+    div.innerHTML='<div class="columns"><div class="column"><div class="column"><div class="box"><article class="media"><div class="media-left"></div><div class="media-content"><div class="content"><p id="cont"><strong></strong><small></small><small></small><br><span></span></p></div><nav class="level"><div class="level-left"><a class="level-item"><span class="icon is-small"><i class="fa fa-arrow-up"></i></span></a><a class="level-item"><span class="icon is-small"><i class="fa fa-arrow-down"></i></span></a></div></nav></div></article></div></div></div></div>';
+    content = div.querySelector('#cont');
+    content.querySelector('strong').textContent=`${data.id_usuario}`;
+    let small = content.querySelectorAll('small');
+    small[0].textContent = `${data.id_usuario}`;
+    small[1].textContent = `31`;
+    content.querySelector('span').textContent = `${data.id_gossip}`;
+    gossipArea.appendChild(div);
   });
+  
 }
 
 function getGossips() {

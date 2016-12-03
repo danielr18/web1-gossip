@@ -80,3 +80,9 @@ body .home #gossip-text {
 
 body .home #cont {
   word-break: break-all; }
+
+.footer {
+  color: whitesmoke; }
+
+.nav {
+  background-color: whitesmoke; }

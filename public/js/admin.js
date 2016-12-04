@@ -80,3 +80,4 @@ function getAndRender(){
   });
 }
 gossipPushButton.onclick = pushGossip;
+getAndRender();

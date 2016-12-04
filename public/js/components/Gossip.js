@@ -122,8 +122,9 @@ class Gossip {
   remove(){
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
-      XHR.open('get', '/gossip/delete/'+this.id_gossip, true);
-
+      let url = JSON.parse(window.localStorage.getItem('user')).admin ? `admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}` : `/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
+      console.log(url);
+      XHR.open('get', url , true);
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
         if (e.target.status == 200) {
@@ -137,6 +138,7 @@ class Gossip {
           });
         }
       };
+      XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
       XHR.send();
     });
   }

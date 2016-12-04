@@ -19,9 +19,9 @@ function pushGossip() {
   const user = localStorage.user && JSON.parse(localStorage.user);
   const gossip = new Gossip(user.name, gossipText.value);
 
-  gossip.onUpdate = onGossipUpdate;
+  //gossip.onUpdate = onGossipUpdate;
 
-  gossipArray.push(gossip);
+  //gossipArray.push(gossip);
 
   gossip.post()
     .then(function() {

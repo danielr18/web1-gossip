@@ -52,6 +52,7 @@ router.post('/gossip/create', function(req, res) {
   let data = req.body;
   let gossip = {
     id_gossip : count,
+    id_usuario : data.id_usuario,
     de_gossip : data.de_gossip,
     ka_gossip : 0,
     da_gossip : new Date(),

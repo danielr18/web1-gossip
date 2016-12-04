@@ -78,7 +78,7 @@ function getAndRender(){
   getGossips()
   .then(() => {
       gossipArray.forEach(function(g,index){
-      let gos = new Gossip(g.id_user,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
+      let gos = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
       gos.onUpdate = onGossipUpdate;
       gossipArray[index] = gos;
     });

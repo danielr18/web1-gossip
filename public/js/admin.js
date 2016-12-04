@@ -40,11 +40,18 @@ function render() {
   while (allGossips.firstChild) {
     allGossips.removeChild(allGossips.firstChild);
   }
+  //CHECK THIS
   gossipArray.sort((g1, g2) => g2.date.getTime() - g1.date.getTime());
-  gossipArray.forEach(function(gossip, index) {
+  let deletedArray = gossipArray.filter((gossip) => {
+    return gossip.status === 0;
+  });
+  deletedArray.forEach(function(gossip, index) {
     deletedGossips.appendChild(gossip.render());
   });
-  gossipArray.forEach(function(gossip, index) {
+  let allArray = gossipArray.filter((gossip) =>  {
+    return gossip.status === 1;
+  });
+  allArray.forEach(function(gossip, index) {
     allGossips.appendChild(gossip.render());
   });
 
@@ -71,6 +78,7 @@ function getAndRender(){
       gossipArray.forEach(function(g,index){
       let gos = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
       gos.onUpdate = onGossipUpdate;
+      gos.onDelete = getAndRender;
       gossipArray[index] = gos;
     });
     render();

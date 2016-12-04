@@ -22,6 +22,10 @@ class Gossip {
     //Needs to be implemented by the object.
   }
 
+  onDelete() {
+
+  }
+
   update(properties) {
     const old = Object.assign({}, this);
     Object.assign(this, properties);
@@ -115,6 +119,27 @@ class Gossip {
     });
   }
 
+  remove(){
+    return new Promise((resolve, reject) => {
+      const XHR = new XMLHttpRequest();
+      XHR.open('get', '/gossip/delete/'+this.id_gossip, true);
+
+      XHR.onload = (e) => {
+        //TODO: Grab data from response and set it to the object
+        if (e.target.status == 200) {
+          this.update({
+            status: 0
+          });
+          resolve(e.target.response);
+        } else {
+          reject({
+            message: "Something went wrong"
+          });
+        }
+      };
+      XHR.send();
+    });
+  }
   render() {
     const gossip = document.createElement('div');
     gossip.className = 'gossip notification';
@@ -125,6 +150,13 @@ class Gossip {
       if (user.name == this.id_user || user.admin) {
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete';
+        deleteButton.addEventListener('mouseup', () =>{
+          this.remove()
+            .then(this.onDelete)
+            .catch((e) => {
+              console.log(e);
+            });
+        });
         gossip.insertBefore(deleteButton, gossip.querySelector('.gossip-wrapper'));
       }
     }

@@ -3,7 +3,7 @@ class Gossip {
     this.id_user = id_user;
     this.description = description;
     this.date = date;
-    this.karma = Math.floor(Math.random() * 1000);
+    this.karma = karma;
     this.status = status;
     if (id_gossip) {
       this.id_gossip = id_gossip;
@@ -40,10 +40,12 @@ class Gossip {
 
         XHR.onload = (e) => {
           //TODO: Grab data from response and set it to the object
-          const res = JSON.parse(e.target.response);
-          this.update({
-            id_gossip: res.data.id_gossip
-          });
+          // const res = JSON.parse(e.target.response);
+          // this.update({
+          //   id_gossip: res.data.id_gossip
+          // });
+
+          //Since we'll start getting objects with id's on them this is not necessary
           resolve();
         };
 
@@ -74,7 +76,7 @@ class Gossip {
             message: "Something went wrong"
           });
         }
-      };
+    };
 
       XHR.setRequestHeader('Content-type', 'application/json');
       const payload = {

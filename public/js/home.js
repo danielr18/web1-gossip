@@ -27,17 +27,18 @@ function pushGossip() {
   const user = localStorage.user && JSON.parse(localStorage.user);
   const gossip = new Gossip(user.name, gossipText.value);
 
-  gossip.onUpdate = onGossipUpdate;
+  //gossip.onUpdate = onGossipUpdate;
 
-  gossipArray.push(gossip);
+  // gossipArray.push(gossip);
 
   gossip.post()
-    .then(function() {
-      render();
+    .then(() => {
+      getAndRender();
     })
     .catch(function(err) {
       console.log(err);
     });
+    gossipText.value ="";
 }
 
 function render() {
@@ -59,13 +60,34 @@ function render() {
 }
 
 function getGossips() {
-  let XHR = new XMLHttpRequest();
-  XHR.open('get', 'http://dildo/gossip/all', true);
-  XHR.onload = function(response) {
-    // TODO: Parse response, set gossipArray
-    console.log(response);
-  };
-  //XHR.send();
+  return new Promise((resolve,reject)=>{
+    let XHR = new XMLHttpRequest();
+    XHR.open('get', '/gossip/all', true);
+    XHR.onload = function(response) {
+      // TODO: Parse response, set gossipArray
+      let res = JSON.parse(response.target.response);
+      let gossips = res.gossips;
+      gossipArray = gossips;
+      resolve()
+    };
+    XHR.send();
+  });
+}
+
+function getAndRender(){
+  getGossips()
+  .then(() => {
+      gossipArray.forEach(function(g,index){
+      let gos = new Gossip(g.id_user,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
+      gos.onUpdate = onGossipUpdate;
+      gossipArray[index] = gos;
+    });
+    render();
+  })
+  .catch(function(err){
+    console.log(err);
+  });
 }
 
 gossipPushButton.onclick = pushGossip;
+getAndRender();

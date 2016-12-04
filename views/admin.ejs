@@ -2,28 +2,28 @@
 
 <body>
   <% include header %>
-  <section class="section home main">
+  <section class="section admin main">
     <div class="container">
       <div class="columns">
-        <div class="column gossips-section hot-gossips">
+        <div class="column gossips-section all-gossips">
           <h3 class="title">
             <span class="icon">
-              <i class="fa fa-fire"></i>
+              <i class="fa fa-comment"></i>
             </span>
-            Hot
+            All
           </h3>
           <div class="underline"></div>
-          <div class="gossips-wrapper" id="hot-gossips"></div>
+          <div class="gossips-wrapper" id="all-gossips"></div>
         </div>
-        <div class="column gossips-section new-gossips">
+        <div class="column gossips-section deleted-gossips">
           <h3 class="title">
             <span class="icon">
-              <i class="fa fa-clock-o"></i>
+              <i class="fa fa-trash"></i>
             </span>
-            New
+            Deleted
           </h3>
           <div class="underline"></div>
-          <div class="gossips-wrapper" id="new-gossips"></div>
+          <div class="gossips-wrapper" id="deleted-gossips"></div>
         </div>
         <div class="column">
           <div class="box form-group">
@@ -40,6 +40,6 @@
   </div>
   <% include footer %>
   <script type="text/javascript" src="/js/components/Gossip.js"></script>
-  <script type="text/javascript" src="/js/home.js"></script>
+  <script type="text/javascript" src="/js/admin.js"></script>
 </body>
 </html>

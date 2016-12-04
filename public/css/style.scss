@@ -4,10 +4,11 @@
 
 body {
   .nav {
-    .brand-title {
+    #brand-title {
       font-family: 'Pacifico', cursive;
       font-size: 22px;
       color: $primary;
+      user-select: none;
     }
   }
 
@@ -16,8 +17,22 @@ body {
     margin-left: 4px;
   }
 
-  .section.home {
+  .main {
     background-color: inherit;
+
+    #gossip-text {
+      width: 100%;
+      resize: none;
+      padding: 10px;
+      color: grey;
+      font-size: 16px;
+    }
+
+    #gossip-push-button {
+      text-align: center;
+      display: inherit;
+      margin: 0 auto;
+    }
 
     .gossips-section {
       .title {
@@ -45,6 +60,26 @@ body {
 
         .underline {
           background-color: $blue;
+        }
+      }
+
+      &.all-gossips {
+        .title {
+          color: $primary;
+        }
+
+        .underline {
+          background-color: $primary;
+        }
+      }
+
+      &.deleted-gossips {
+        .title {
+          color: $red;
+        }
+
+        .underline {
+          background-color: $red;
         }
       }
 
@@ -117,7 +152,6 @@ body {
             &:hover {
               color: #363636;
             }
-
             flex: 1;
             margin: auto;
 

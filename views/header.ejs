@@ -1,23 +1,24 @@
 <nav class="nav has-shadow">
     <div class="container">
-      <div class="nav-left">
-        <a class="nav-item is-tab"><i class="fa fa-home"></i> &nbsp; Home</a>
-        <a class="nav-item is-tab"><i class="fa fa-search"></i> &nbsp; Search</a>
+      <div class="nav-left" id="nav-tabs">
+        <a class="nav-item is-tab" id="home-tab"><i class="fa fa-home"></i> &nbsp; <span class="tab-name">Home</span></a>
+        <a class="nav-item is-tab" id="search-tab"><i class="fa fa-search"></i> &nbsp; <span class="tab-name">Search</span></a>
       </div>
 
       <div class="nav-center">
-        <a class="nav-item brand-title">
+        <a class="nav-item" id="brand-title">
           Gossip
         </a>
       </div>
 
       <div class="nav-right nav-menu">
-        <a class="nav-item is-tab"><i class="fa fa-user"></i> &nbsp; User</a>
+        <a class="nav-item is-tab" id="user-tab"><i class="fa fa-user"></i> &nbsp;<span id="user-name">User</span></a>
         <span class="nav-item">
-          <a class="button">
+          <a class="button" id="logout-btn">
             <span>Logout</span>
           </a>
         </span>
       </div>
     </div>
   </nav>
+  <script src="/js/header.js"></script>

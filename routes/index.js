@@ -12,8 +12,20 @@ router.get('/home', function(req, res) {
   res.render('home');
 });
 
-router.get('/profile', function(req, res) {
-  res.render('profile');
+router.get('/admin', function(req, res) {
+  res.render('admin');
+});
+
+router.get('/user/:user', function(req, res) {
+  res.render('user', {user: req.params.user});
+});
+
+router.get('/search', function(req, res) {
+  res.render('search');
+});
+
+router.get('/logs', function(req, res) {
+  res.render('logs');
 });
 
 router.get('/login', function(req, res) {
@@ -66,11 +78,5 @@ router.post('/gossip/create', function(req, res) {
   });
 });
 
-router.post('/secret', function(req, res) {
-  let data = req.body;
-  ejs.renderFile('views/gossip.ejs', data, function(err, str) {
-    res.send(str);
-  });
-});
 
 module.exports = router;

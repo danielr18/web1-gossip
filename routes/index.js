@@ -78,5 +78,29 @@ router.post('/gossip/create', function(req, res) {
   });
 });
 
+router.get('/gossip/delete',function(req, res) {
+  console.log(req.body);
+  let id = parseInt(req.query.id_gossip);
+  let index = gossipArray.map(function(gossip){
+    return gossip.id_gossip;
+  }).indexOf(id);
+  gossipArray[index].id_gossip_status = 0;
+  res.send({message: `Gossip ${id} deleted`});
+});
+
+router.post('/gossip/delete',function(req, res) {
+  console.log(req.body);
+  res.send("papo")
+});
+
+router.get('/admin/gossip/delete',function(req, res) {
+  let id = parseInt(req.query.id_gossip);
+  let index = gossipArray.map(function(gossip){
+    return gossip.id_gossip;
+  }).indexOf(id);
+  gossipArray[index].id_gossip_status = 0;
+  res.send({message: `Gossip ${id} deleted`});
+});
+
 
 module.exports = router;

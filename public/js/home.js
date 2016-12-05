@@ -62,7 +62,7 @@ function render() {
 function getGossips() {
   return new Promise((resolve,reject)=>{
     let XHR = new XMLHttpRequest();
-    XHR.open('get', '/gossip/all', true);
+    XHR.open('get', 'https://gossip-app.herokuapp.com/gossip/all', true);
     XHR.onload = function(response) {
       // TODO: Parse response, set gossipArray
       let res = JSON.parse(response.target.response);
@@ -80,7 +80,12 @@ function getAndRender(){
       gossipArray.forEach(function(g,index){
       let gos = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
       gos.onUpdate = onGossipUpdate;
+      gos.onDelete = getAndRender;
       gossipArray[index] = gos;
+    });
+    //Filtering
+    gossipArray = gossipArray.filter((gossip) => {
+      return parseInt(gossip.status) === 1;
     });
     render();
   })

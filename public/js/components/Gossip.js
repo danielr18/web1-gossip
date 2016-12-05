@@ -8,8 +8,9 @@ class Gossip {
     if (id_gossip) {
       this.id_gossip = id_gossip;
     }
-  }
 
+  }
+//https://gossip-app.herokuapp.com
   onUpdate(oldGossip, newGossip) {
     //Needs to be implemented by the object.
   }
@@ -20,6 +21,10 @@ class Gossip {
 
   onDownvote() {
     //Needs to be implemented by the object.
+  }
+
+  onDelete() {
+
   }
 
   update(properties) {
@@ -36,7 +41,7 @@ class Gossip {
         });
       } else {
         const XHR = new XMLHttpRequest();
-        XHR.open('post', '/gossip/create', true);
+        XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/create', true);
 
         XHR.onload = (e) => {
           //TODO: Grab data from response and set it to the object
@@ -62,7 +67,7 @@ class Gossip {
   up() {
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
-      XHR.open('post', '/gossip/up', true);
+      XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/up', true);
 
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
@@ -90,7 +95,7 @@ class Gossip {
   down() {
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
-      XHR.open('post', '/gossip/down', true);
+      XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/down', true);
 
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
@@ -115,6 +120,29 @@ class Gossip {
     });
   }
 
+  remove(){
+    return new Promise((resolve, reject) => {
+      const XHR = new XMLHttpRequest();
+      let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
+      console.log(url);
+      XHR.open('get', url , true);
+      XHR.onload = (e) => {
+        //TODO: Grab data from response and set it to the object
+        if (e.target.status == 200) {
+          this.update({
+            status: 0
+          });
+          resolve(e.target.response);
+        } else {
+          reject({
+            message: "Something went wrong"
+          });
+        }
+      };
+      XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+      XHR.send();
+    });
+  }
   render() {
     const gossip = document.createElement('div');
     gossip.className = 'gossip notification';
@@ -122,10 +150,20 @@ class Gossip {
     gossip.innerHTML = '<div class="gossip-wrapper"> <div class="gossip-karma-wrapper"> <div class="vote-wrapper"> <button class="vote-btn positive-vote"> <span class="icon is-small"> <i class="fa fa-arrow-up"></i> </span> </button> </div> <div class="karma-wrapper"> <span class="gossip-karma"></span> </div> <div class="vote-wrapper"> <button class="vote-btn negative-vote"> <span class="icon is-small"> <i class="fa fa-arrow-down"></i> </span> </button> </div> </div> <div class="gossip-content"> <div class="gossip-header"> <p> <strong class="gossip-user"></strong> <span>-</span> <small class="gossip-date"></small> </p> </div> <div class="gossip-body"> <p class="gossip-description"></p> </div> </div> </div>';
     if (localStorage.user) {
       user = JSON.parse(localStorage.user);
-      if (user.name == this.id_user || user.admin) {
+      if ((user.name == this.id_user || user.admin) && this.status !== 0) {
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete';
+        deleteButton.addEventListener('mouseup', () =>{
+          this.remove()
+            .then(this.onDelete)
+            .catch((e) => {
+              console.log(e);
+            });
+        });
         gossip.insertBefore(deleteButton, gossip.querySelector('.gossip-wrapper'));
+      }
+      if(user.admin && this.status === 0){
+        // TODO: Implement recovery of gossips for admin
       }
     }
     gossip.querySelector('.gossip-user').textContent = this.id_user;

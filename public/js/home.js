@@ -62,7 +62,7 @@ function render() {
 function getGossips() {
   return new Promise((resolve,reject)=>{
     let XHR = new XMLHttpRequest();
-    XHR.open('get', '/gossip/all', true);
+    XHR.open('get', 'https://gossip-app.herokuapp.com/gossip/all', true);
     XHR.onload = function(response) {
       // TODO: Parse response, set gossipArray
       let res = JSON.parse(response.target.response);

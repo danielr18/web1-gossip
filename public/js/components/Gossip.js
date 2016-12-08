@@ -206,7 +206,7 @@ class Gossip {
     }
     gossip.querySelector('.gossip-user').textContent = this.id_user;
     gossip.querySelector('.gossip-description').textContent = this.description;
-    gossip.querySelector('.gossip-date').textContent = this.date.toUTCString();
+    gossip.querySelector('.gossip-date').textContent = this.date.toISOString().slice(0,10);
     gossip.querySelector('.gossip-karma').textContent = this.karma;
 
     gossip.querySelector('.negative-vote').addEventListener('mouseup', () => {

@@ -71,7 +71,7 @@ body .logs .underline {
   background-color: turquoise; }
 
 body .logs .logs-wrapper {
-  max-height: 300px;
+  max-height: 600px;
   overflow-y: auto; }
   body .logs .logs-wrapper .log {
     margin-top: 10px;

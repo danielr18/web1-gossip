@@ -17,7 +17,6 @@ function getLogs(){
 
 onmessage = function(e) {
   let status = e.data.status;
-  postMessage(status);
   switch(status){
     case 'START':
       if (!getInterval){

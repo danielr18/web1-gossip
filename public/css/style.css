@@ -5,12 +5,30 @@ body .nav #brand-title {
   color: #00d1b2;
   user-select: none; }
 
+body .invisible {
+  display: none !important; }
+
 body .underline {
   height: 2px;
   margin-left: 4px; }
 
+body .vertical-divider {
+  height: auto;
+  width: 2px;
+  background-color: #00d1b2; }
+
 body .main {
   background-color: inherit; }
+  body .main .karma-search-modes * {
+    flex: 0 1 auto; }
+  body .main .karma-search-modes label {
+    display: inline-block; }
+    body .main .karma-search-modes label input[type="radio"] {
+      margin: 0 5px; }
+    body .main .karma-search-modes label input[type="number"] {
+      width: 50px; }
+  body .main #search-btn {
+    margin-left: 10px; }
   body .main #gossip-text {
     width: 100%;
     resize: none;
@@ -21,6 +39,11 @@ body .main {
     text-align: center;
     display: inherit;
     margin: 0 auto; }
+  body .main .search-gossips {
+    padding: 10px; }
+    body .main .search-gossips .gossip {
+      flex: 0 1 31%;
+      margin: 14px; }
   body .main .gossips-section .title {
     margin-bottom: 9px; }
     body .main .gossips-section .title .icon {

@@ -24,7 +24,11 @@ class Gossip {
   }
 
   onDelete() {
+    //Needs to be implemented by the object.
+  }
 
+  onRecover(){
+    //Needs to be implemented by the object.
   }
 
   update(properties) {

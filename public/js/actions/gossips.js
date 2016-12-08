@@ -27,11 +27,11 @@ function getGossips(admin = false) {
 }
 
 function renderGossips(parentNode, gossips, filter, sort, onGossipUpdate, onGossipDelete) {
-  if(typeof filter == 'function') {
+  if (typeof filter == 'function') {
     gossips = gossips.filter(filter);
   }
 
-  if(typeof sort == 'function') {
+  if (typeof sort == 'function') {
     gossips.sort(sort);
   }
 

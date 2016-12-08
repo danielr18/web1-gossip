@@ -6,7 +6,7 @@ function render() {
   while (logsWrapper.firstChild) {
     logsWrapper.removeChild(logsWrapper.firstChild);
   }
-  logsArray.sort((g1, g2) => g2.karma - g1.karma);
+  logsArray.sort((g1, g2) => g2.id - g1.id);
   logsArray.forEach(function(log, index) {
     logsWrapper.appendChild(log.render());
   });
@@ -19,7 +19,6 @@ function getLogs() {
     XHR.onload = function(response) {
       // TODO: Parse response, set logsArray
         let res = JSON.parse(response.target.response);
-        console.log(res);
         let logs = res.logs;
         resolve(logs)
     };
@@ -49,9 +48,8 @@ function getAndRender() {
 
 function getWorkerMsg(message){
   let logs = message.data;
-  console.log(logs);
   logs.forEach(function(l, index) {
-    let log = new log(l.id_gossip_log, l.id_gossip, l.de_gossip_log, l.da_gossip_log);
+    let log = new Log(l.id_gossip_log, l.id_gossip, l.de_gossip_log, l.da_gossip_log);
     logsArray[index] = log;
   });
   render();

@@ -143,7 +143,6 @@ class Gossip {
       XHR.send();
     });
   }
-  
   render() {
     const gossip = document.createElement('div');
     gossip.className = 'gossip notification';

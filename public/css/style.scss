@@ -12,13 +12,42 @@ body {
     }
   }
 
+  .invisible {
+    display: none !important;
+  }
+
   .underline {
     height: 2px;
     margin-left: 4px;
   }
 
+  .vertical-divider {
+    height: auto;
+    width: 2px;
+    background-color: $primary;
+  }
+
   .main {
     background-color: inherit;
+
+    .karma-search-modes {
+      * {
+        flex: 0 1 auto;
+      }
+      label {
+        display: inline-block;
+        input[type="radio"] {
+          margin: 0 5px;
+        }
+        input[type="number"] {
+          width: 50px;
+        }
+      }
+    }
+
+    #search-btn {
+      margin-left: 10px;
+    }
 
     #gossip-text {
       width: 100%;
@@ -32,6 +61,15 @@ body {
       text-align: center;
       display: inherit;
       margin: 0 auto;
+    }
+
+    .search-gossips {
+      padding: 10px;
+
+      .gossip {
+        flex: 0 1 31%;
+        margin: 14px;
+      }
     }
 
     .gossips-section {

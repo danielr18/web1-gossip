@@ -11,43 +11,72 @@
           <div class="level-left">
             <div class="level-item">
               <p class="subtitle is-5">
-                <strong>123</strong>
-                posts
+                <strong id="gossips-count"></strong>
+                gossips
               </p>
             </div>
             <div class="level-item">
-              <p class="control has-addons">
-                <input class="input" type="text" placeholder="Find a post">
-                <button class="button">
-                  Search
-                </button>
+              <p class="search-gossip-input">
+                <input class="input" type="text" id="search-input" placeholder="Find a gossip">
               </p>
+              <div class="karma-search-modes columns invisible">
+                <label class="column">
+                  <input type="radio" name="karma-mode" value="equal">
+                  <strong>=</strong>
+                  <input id="equalKarmaInput" type="number">
+                </label>
+                <div class="vertical-divider"></div>
+                <label class="column">
+                  <input type="radio" name="karma-mode" value="greater">
+                  <strong>></strong>
+                  <input id="greaterKarmaInput" type="number">
+                </label>
+                <div class="vertical-divider"></div>
+                <label class="column">
+                  <input type="radio" name="karma-mode" value="lower">
+                  <strong><</strong>
+                  <input id="lowerKarmaInput" type="number">
+                </label class="column">
+                <div class="vertical-divider"></div>
+                <label class="column">
+                  <input type="radio" name="karma-mode" value="range">
+                  <input id="minimumRangeKarmaInput" type="number">
+                  <strong>< Karma <</strong>
+                  <input id="maximumRangeKarmaInput" type="number">
+                </label>
+                <div class="vertical-divider"></div>
+              </div>
+            </div>
+            <div class="level-item">
+              <button id="search-btn" class="button">
+                Search
+              </button>
             </div>
           </div>
 
           <!-- Right side -->
           <div class="level-right">
-            <p class="level-item">
-              <strong>All</strong>
-            </p>
-            <p class="level-item">
-              <a>Published</a>
-            </p>
-            <p class="level-item">
-              <a>Drafts</a>
-            </p>
-            <p class="level-item">
-              <a>Deleted</a>
-            </p>
-            <p class="level-item">
-              <a class="button is-success">New</a>
-            </p>
+            <label class="level-item">
+              <input type="radio" name="search-mode" checked="checked" onclick="handleSearchModeChange(this)" value="words">
+              Words
+            </label>
+            <label class="level-item">
+              <input type="radio" name="search-mode" onclick="handleSearchModeChange(this)" value="user">
+              User
+            </label>
+            <label class="level-item">
+              <input type="radio" name="search-mode" onclick="handleSearchModeChange(this)" value="karma">
+              Karma
+            </label>
           </div>
         </nav>
       </div>
+      <div class="columns is-multiline gossips-section search-gossips" id="search-gossips"></div>
     </div>
   </section>
   <% include footer %>
+  <script type="text/javascript" src="/js/actions/gossips.js"></script>
   <script type="text/javascript" src="/js/components/Gossip.js"></script>
+  <script type="text/javascript" src="/js/search.js"></script>
 </body>
 </html>

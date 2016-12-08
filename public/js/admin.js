@@ -3,6 +3,7 @@ const gossipText = document.querySelector('#gossip-text');
 const deletedGossips = document.querySelector('#deleted-gossips');
 const allGossips = document.querySelector('#all-gossips');
 var gossipArray = [];
+var gossipWorker = null;
 
 function onGossipUpdate(oldGossip, newGossip) {
   const gossipElems = document.querySelectorAll(`[gossip_id="${newGossip.id_gossip}"]`);
@@ -69,6 +70,11 @@ function getGossips() {
 function getAndRender() {
   getGossips()
     .then((gossips) => {
+      if(!gossipWorker){
+        gossipWorker = new Worker('../js/workers/gossipW.js');
+        gossipWorker.postMessage({status: 'START', user: localStorage.user && JSON.parse(localStorage.user)});
+        gossipWorker.onmessage = getWorkerMsg;
+      }
       gossips.forEach(function(g, index) {
         let gossip = new Gossip(g.id_usuario, g.de_gossip, g.id_gossip, g.id_gossip_status, g.ka_gossip, new Date(Date.parse(g.da_gossip)));
         gossip.onUpdate = onGossipUpdate;
@@ -82,5 +88,18 @@ function getAndRender() {
       console.log(err);
     });
 }
+
+function getWorkerMsg(message){
+  let gossips = message.data;
+  gossips.forEach(function(g, index) {
+    let gossip = new Gossip(g.id_usuario, g.de_gossip, g.id_gossip, g.id_gossip_status, g.ka_gossip, new Date(Date.parse(g.da_gossip)));
+    gossip.onUpdate = onGossipUpdate;
+    gossip.onDelete = getAndRender;
+    gossip.onRecover = getAndRender;
+    gossipArray[index] = gossip;
+  });
+  render();
+}
+
 gossipPushButton.onclick = pushGossip;
 getAndRender();

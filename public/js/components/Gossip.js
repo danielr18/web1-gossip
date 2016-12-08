@@ -121,7 +121,6 @@ class Gossip {
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
       let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
-      console.log(url);
       XHR.open('get', url , true);
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
@@ -145,7 +144,6 @@ class Gossip {
       return new Promise((resolve, reject) => {
         const XHR = new XMLHttpRequest();
         let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
-        console.log(url);
         XHR.open('get', url , true);
         XHR.onload = (e) => {
           //TODO: Grab data from response and set it to the object

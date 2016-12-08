@@ -9,7 +9,7 @@ class Log {
   render() {
     const log = document.createElement('div');
     let p = document.createElement('P');
-    div.className = 'log';
+    log.className = 'log';
     log.setAttribute('log-id', this.id);
     log.setAttribute('gossip-id', this.id_gossip);
     p.textContent = `${this.date} : ${this.description}`

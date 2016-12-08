@@ -35,12 +35,7 @@ function onLogsTabClick() {
 }
 
 function onHomeTabClick() {
-  if(user.admin) {
-    location.href = '/admin';
-  }
-  else {
-    location.href = '/home';
-  }
+  location.href = '/home';
 }
 
 function onSearchTabClick() {

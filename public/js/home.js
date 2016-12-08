@@ -52,7 +52,7 @@ function render() {
   gossipArray.forEach(function(gossip, index) {
     hotGossips.appendChild(gossip.render());
   });
-  gossipArray.sort((g1, g2) => g2.date.getTime() - g1.date.getTime());
+  gossipArray.sort((g1, g2) => g2.id_gossip - g1.id_gossip);
   gossipArray.forEach(function(gossip, index) {
     newGossips.appendChild(gossip.render());
   });

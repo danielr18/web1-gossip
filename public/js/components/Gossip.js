@@ -5,7 +5,7 @@ class Gossip {
     this.date = date;
     this.karma = karma;
     this.status = status;
-    if (id_gossip) {
+    if (id_gossip !== (undefined || null)) {
       this.id_gossip = id_gossip;
     }
 

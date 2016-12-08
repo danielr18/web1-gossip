@@ -41,7 +41,7 @@ function render() {
     allGossips.removeChild(allGossips.firstChild);
   }
   //CHECK THIS
-  gossipArray.sort((g1, g2) => g2.date.getTime() - g1.date.getTime());
+  gossipArray.sort((g1, g2) => g2.id_gossip - g1.id_gossip);
   let deletedArray = gossipArray.filter((gossip) => {
     return gossip.status === 0;
   });
@@ -62,7 +62,6 @@ function getGossips() {
     let XHR = new XMLHttpRequest();
     XHR.open('get', 'https://gossip-app.herokuapp.com/admin/gossip/all', true);
     XHR.onload = function(response) {
-      // TODO: Parse response, set gossipArray
       let res = JSON.parse(response.target.response);
       let gossips = res.gossips;
       gossipArray = gossips;

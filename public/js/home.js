@@ -3,7 +3,7 @@ const gossipText = document.querySelector('#gossip-text');
 const hotGossips = document.querySelector('#hot-gossips');
 const newGossips = document.querySelector('#new-gossips');
 var gossipArray = [];
-var gossipWorker = 0;
+var gossipWorker = null;
 
 function onGossipUpdate(oldGossip, newGossip) {
   const gossipElems = document.querySelectorAll(`[gossip_id="${newGossip.id_gossip}"]`);

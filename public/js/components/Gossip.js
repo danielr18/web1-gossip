@@ -63,6 +63,7 @@ class Gossip {
 
   up() {
     return new Promise((resolve, reject) => {
+      let user = localStorage.user && JSON.parse(localStorage.user);
       const XHR = new XMLHttpRequest();
       XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/up', true);
 
@@ -82,7 +83,7 @@ class Gossip {
 
       XHR.setRequestHeader('Content-type', 'application/json');
       const payload = {
-        id_usuario: this.id_user,
+        id_usuario: user.name,
         id_gossip: this.id_gossip
       }
       XHR.send(JSON.stringify(payload));
@@ -91,6 +92,7 @@ class Gossip {
 
   down() {
     return new Promise((resolve, reject) => {
+      let user = localStorage.user && JSON.parse(localStorage.user);
       const XHR = new XMLHttpRequest();
       XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/down', true);
 
@@ -110,7 +112,7 @@ class Gossip {
 
       XHR.setRequestHeader('Content-type', 'application/json');
       const payload = {
-        id_usuario: this.id_user,
+        id_usuario: user.name,
         id_gossip: this.id_gossip
       }
       XHR.send(JSON.stringify(payload));
@@ -120,7 +122,8 @@ class Gossip {
   remove(){
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
-      let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
+      let user = localStorage.user && JSON.parse(localStorage.user);
+      let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${user.name}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
       XHR.open('get', url , true);
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
@@ -143,7 +146,8 @@ class Gossip {
   recover(){
       return new Promise((resolve, reject) => {
         const XHR = new XMLHttpRequest();
-        let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
+        let user = localStorage.user && JSON.parse(localStorage.user);
+        let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${user.name}`;
         XHR.open('get', url , true);
         XHR.onload = (e) => {
           //TODO: Grab data from response and set it to the object

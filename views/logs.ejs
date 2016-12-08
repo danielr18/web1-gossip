@@ -2,12 +2,24 @@
 
 <body>
   <% include header %>
-  <section class="section home main">
+  <section class="section logs main">
     <div class="container">
-      Logs
+      <div class="columns">
+        <div class="column log-section">
+          <h3 class="title">
+            <span class="icon">
+              <i class="fa fa-file"></i>
+            </span>
+            Logs
+          </h3>
+          <div class="underline"></div>
+          <div class="logs-wrapper" id="all-logs"></div>
+        </div>
+      </div>
     </div>
   </section>
   <% include footer %>
-  <script type="text/javascript" src="/js/components/Gossip.js"></script>
+  <script type="text/javascript" src="/js/components/log.js"></script>
+  <script type="text/javascript" src="/js/logs.js" charset="utf-8"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ class Gossip {
     this.date = date;
     this.karma = karma;
     this.status = status;
-    if (id_gossip) {
+    if (id_gossip !== (undefined || null)) {
       this.id_gossip = id_gossip;
     }
 
@@ -24,7 +24,11 @@ class Gossip {
   }
 
   onDelete() {
+    //Needs to be implemented by the object.
+  }
 
+  onRecover(){
+    //Needs to be implemented by the object.
   }
 
   update(properties) {
@@ -44,13 +48,6 @@ class Gossip {
         XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/create', true);
 
         XHR.onload = (e) => {
-          //TODO: Grab data from response and set it to the object
-          // const res = JSON.parse(e.target.response);
-          // this.update({
-          //   id_gossip: res.data.id_gossip
-          // });
-
-          //Since we'll start getting objects with id's on them this is not necessary
           resolve();
         };
 
@@ -124,7 +121,6 @@ class Gossip {
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
       let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
-      console.log(url);
       XHR.open('get', url , true);
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
@@ -135,7 +131,7 @@ class Gossip {
           resolve(e.target.response);
         } else {
           reject({
-            message: "Something went wrong"
+            message: "Unable to remove"
           });
         }
       };
@@ -143,6 +139,31 @@ class Gossip {
       XHR.send();
     });
   }
+
+  recover(){
+      return new Promise((resolve, reject) => {
+        const XHR = new XMLHttpRequest();
+        let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
+        XHR.open('get', url , true);
+        XHR.onload = (e) => {
+          //TODO: Grab data from response and set it to the object
+          if (e.target.status == 200) {
+            this.update({
+              status: 1
+            });
+            resolve(e.target.response);
+          } else {
+            reject({
+              message: "Unable to restore",
+              response: e.target.response
+            });
+          }
+        };
+        //XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        XHR.send();
+    });
+  }
+
   render() {
     const gossip = document.createElement('div');
     gossip.className = 'gossip notification';
@@ -164,6 +185,19 @@ class Gossip {
       }
       if(user.admin && this.status === 0){
         // TODO: Implement recovery of gossips for admin
+        const recoverButton = document.createElement('button');
+        const recoverInner = document.createElement('I');
+        recoverInner.className = "fa fa-check";
+        recoverButton.className = 'search';
+        recoverButton.addEventListener('mouseup', () => {
+          this.recover()
+            .then(this.onRecover)
+            .catch((e) => {
+              console.log(e);
+            });
+        });
+        recoverButton.appendChild(recoverInner);
+        gossip.insertBefore(recoverButton, gossip.querySelector('.gossip-wrapper'));
       }
     }
     gossip.querySelector('.gossip-user').textContent = this.id_user;

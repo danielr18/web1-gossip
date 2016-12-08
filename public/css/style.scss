@@ -126,7 +126,25 @@ body {
       }
     }
   }
+  .logs{
+    .underline{
+      background-color: turquoise;
+    }
+    .logs-wrapper{
+      max-height: 300px;
+      overflow-y: auto;
 
+        .log{
+          margin-top: 10px;
+          padding: 10px;
+          border-radius: 6px;
+          background-color: white;
+        }
+        .log:last-child{
+          margin-bottom: 10px;
+        }
+    }
+  }
   .login {
     .alias {
       height: auto;
@@ -163,6 +181,26 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 
+    .search {
+      border-radius: 0 3px;
+      float: right;
+      margin: -16px -20px 0 20px;
+      cursor: pointer;
+      display: inline-block;
+      height: 24px;
+      outline: none;
+      position: relative;
+      vertical-align: top;
+      width: 24px;
+      background-color: rgba(10, 10, 10, 0.1);
+      border: none;
+      padding : 0;
+
+        i{
+          font-size: 13px;
+          color: white
+        }
+    }
     .gossip-wrapper {
       display: flex;
 

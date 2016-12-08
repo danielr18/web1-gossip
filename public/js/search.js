@@ -58,7 +58,17 @@ searchBtn.onclick = function() {
       }
       break;
   }
-  renderGossips(searchGossips, matchGossips);
+  renderGossips(searchGossips, matchGossips, filterByPublicStatus, sortGossipsByKarma, function() {
+    getGossips()
+      .then((apiGossips) => {
+        gossips = apiGossips.filter(filterByPublicStatus)
+        gossipsCount.textContent = gossips.length;
+        searchBtn.onclick();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 }
 
 getGossips()

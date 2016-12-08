@@ -64,11 +64,9 @@ function getGossips() {
     let XHR = new XMLHttpRequest();
     XHR.open('get', 'https://gossip-app.herokuapp.com/gossip/all', true);
     XHR.onload = function(response) {
-      // TODO: Parse response, set gossipArray
       let res = JSON.parse(response.target.response);
       let gossips = res.gossips;
-      gossipArray = gossips;
-      resolve()
+      resolve(gossips)
     };
     XHR.send();
   });
@@ -76,12 +74,12 @@ function getGossips() {
 
 function getAndRender(){
   getGossips()
-  .then(() => {
-      gossipArray.forEach(function(g,index){
-      let gos = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
-      gos.onUpdate = onGossipUpdate;
-      gos.onDelete = getAndRender;
-      gossipArray[index] = gos;
+  .then((gossips) => {
+      gossips.forEach(function(g,index){
+      let gossip = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
+      gossip.onUpdate = onGossipUpdate;
+      gossip.onDelete = getAndRender;
+      gossipArray[index] = gossip;
     });
     //Filtering
     gossipArray = gossipArray.filter((gossip) => {

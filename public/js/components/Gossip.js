@@ -48,13 +48,6 @@ class Gossip {
         XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/create', true);
 
         XHR.onload = (e) => {
-          //TODO: Grab data from response and set it to the object
-          // const res = JSON.parse(e.target.response);
-          // this.update({
-          //   id_gossip: res.data.id_gossip
-          // });
-
-          //Since we'll start getting objects with id's on them this is not necessary
           resolve();
         };
 

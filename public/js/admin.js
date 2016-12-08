@@ -19,10 +19,6 @@ function pushGossip() {
   const user = localStorage.user && JSON.parse(localStorage.user);
   const gossip = new Gossip(user.name, gossipText.value);
 
-  //gossip.onUpdate = onGossipUpdate;
-
-  //gossipArray.push(gossip);
-
   gossip.post()
     .then(function() {
       getAndRender();
@@ -30,7 +26,7 @@ function pushGossip() {
     .catch(function(err) {
       console.log(err);
     });
-    gossipText.value ="";
+  gossipText.value = "";
 }
 
 function render() {
@@ -48,7 +44,7 @@ function render() {
   deletedArray.forEach(function(gossip, index) {
     deletedGossips.appendChild(gossip.render());
   });
-  let allArray = gossipArray.filter((gossip) =>  {
+  let allArray = gossipArray.filter((gossip) => {
     return gossip.status === 1;
   });
   allArray.forEach(function(gossip, index) {
@@ -58,34 +54,33 @@ function render() {
 }
 
 function getGossips() {
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve, reject) => {
     let XHR = new XMLHttpRequest();
     XHR.open('get', 'https://gossip-app.herokuapp.com/admin/gossip/all', true);
     XHR.onload = function(response) {
       let res = JSON.parse(response.target.response);
       let gossips = res.gossips;
-      gossipArray = gossips;
-      resolve()
+      resolve(gossips)
     };
     XHR.send();
   });
 }
 
-function getAndRender(){
+function getAndRender() {
   getGossips()
-  .then(() => {
-      gossipArray.forEach(function(g,index){
-      let gos = new Gossip(g.id_usuario,g.de_gossip,g.id_gossip,g.id_gossip_status,g.ka_gossip,new Date(Date.parse(g.da_gossip)));
-      gos.onUpdate = onGossipUpdate;
-      gos.onDelete = getAndRender;
-      gos.onRecover = getAndRender;
-      gossipArray[index] = gos;
+    .then((gossips) => {
+      gossips.forEach(function(g, index) {
+        let gossip = new Gossip(g.id_usuario, g.de_gossip, g.id_gossip, g.id_gossip_status, g.ka_gossip, new Date(Date.parse(g.da_gossip)));
+        gossip.onUpdate = onGossipUpdate;
+        gossip.onDelete = getAndRender;
+        gossip.onRecover = getAndRender;
+        gossipArray[index] = gossip;
+      });
+      render();
+    })
+    .catch(function(err) {
+      console.log(err);
     });
-    render();
-  })
-  .catch(function(err){
-    console.log(err);
-  });
 }
 gossipPushButton.onclick = pushGossip;
 getAndRender();

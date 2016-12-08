@@ -88,7 +88,25 @@ body {
       }
     }
   }
+  .logs{
+    .underline{
+      background-color: turquoise;
+    }
+    .logs-wrapper{
+      max-height: 300px;
+      overflow-y: auto;
 
+        .log{
+          margin-top: 10px;
+          padding: 10px;
+          border-radius: 6px;
+          background-color: white;
+        }
+        .log:last-child{
+          margin-bottom: 10px;
+        }
+    }
+  }
   .login {
     .alias {
       height: auto;

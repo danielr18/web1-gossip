@@ -1,16 +1,16 @@
 class Gossip {
   constructor(id_user, description, id_gossip, status = 1, karma = 0, date = new Date()) {
-    this.id_user = id_user;
-    this.description = description;
-    this.date = date;
-    this.karma = karma;
-    this.status = status;
-    if (id_gossip !== (undefined || null)) {
-      this.id_gossip = id_gossip;
-    }
+      this.id_user = id_user;
+      this.description = description;
+      this.date = date;
+      this.karma = karma;
+      this.status = status;
+      if (id_gossip !== (undefined || null)) {
+        this.id_gossip = id_gossip;
+      }
 
-  }
-//https://gossip-app.herokuapp.com
+    }
+    //https://gossip-app.herokuapp.com
   onUpdate(oldGossip, newGossip) {
     //Needs to be implemented by the object.
   }
@@ -27,8 +27,18 @@ class Gossip {
     //Needs to be implemented by the object.
   }
 
-  onRecover(){
+  onRecover() {
     //Needs to be implemented by the object.
+  }
+
+  isUpvoted() {
+    const upvotedGossips = (localStorage.upvotedGossips && JSON.parse(localStorage.upvotedGossips)) || [];
+    return upvotedGossips.some((id) => id == this.id_gossip);
+  }
+
+  isDownvoted() {
+    const downvotedGossips = (localStorage.downvotedGossips && JSON.parse(localStorage.downvotedGossips)) || [];
+    return downvotedGossips.some((id) => id == this.id_gossip);
   }
 
   update(properties) {
@@ -61,70 +71,114 @@ class Gossip {
     });
   }
 
-  up() {
+  up(addToArray = true) {
     return new Promise((resolve, reject) => {
-      let user = localStorage.user && JSON.parse(localStorage.user);
-      const XHR = new XMLHttpRequest();
-      XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/up', true);
-
-      XHR.onload = (e) => {
-        //TODO: Grab data from response and set it to the object
-        if (e.target.status == 200) {
-          this.update({
-            karma: this.karma + 1
-          });
-          resolve(e.target.response);
-        } else {
-          reject({
-            message: "Something went wrong"
-          });
+      if (!this.isUpvoted()) {
+        const karmaDifference = (addToArray && this.isDownvoted()) ? 2 : 1;
+        let user = localStorage.user && JSON.parse(localStorage.user);
+        const payload = {
+          id_usuario: user.name,
+          id_gossip: this.id_gossip
         }
-    };
+        const upvotedGossips = (localStorage.upvotedGossips && JSON.parse(localStorage.upvotedGossips)) || [];
+        const downvotedGossips = (localStorage.downvotedGossips && JSON.parse(localStorage.downvotedGossips)) || [];
+        if(addToArray) upvotedGossips.push(this.id_gossip);
+        downvotedGossips.splice(downvotedGossips.indexOf(this.id_gossip), 1);
+        localStorage.downvotedGossips = JSON.stringify(downvotedGossips);
+        localStorage.upvotedGossips = JSON.stringify(upvotedGossips);
+        const XHR = new XMLHttpRequest();
+        let responses = 0;
+        XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/up', true);
 
-      XHR.setRequestHeader('Content-type', 'application/json');
-      const payload = {
-        id_usuario: user.name,
-        id_gossip: this.id_gossip
+        XHR.onload = (e) => {
+          responses++;
+          if(responses != karmaDifference) {
+            XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/up', true);
+            XHR.setRequestHeader('Content-type', 'application/json');
+            XHR.send(JSON.stringify(payload));
+          }
+          else {
+            if (e.target.status == 200) {
+              this.update({
+                karma: this.karma + karmaDifference
+              });
+              resolve(e.target.response);
+            } else {
+              reject({
+                message: "Something went wrong"
+              });
+            }
+          }
+        }
+
+        XHR.setRequestHeader('Content-type', 'application/json');
+        XHR.send(JSON.stringify(payload));
+
+      } else {
+        reject({
+          message: "Already upvoted."
+        });
       }
-      XHR.send(JSON.stringify(payload));
     });
   }
 
-  down() {
+  down(addToArray = true) {
     return new Promise((resolve, reject) => {
-      let user = localStorage.user && JSON.parse(localStorage.user);
-      const XHR = new XMLHttpRequest();
-      XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/down', true);
-
-      XHR.onload = (e) => {
-        //TODO: Grab data from response and set it to the object
-        if (e.target.status == 200) {
-          this.update({
-            karma: this.karma - 1
-          });
-          resolve(e.target.response);
-        } else {
-          reject({
-            message: "Something went wrong"
-          });
+      if (!this.isDownvoted()) {
+        const karmaDifference = (addToArray && this.isUpvoted()) ? 2 : 1;
+        let user = localStorage.user && JSON.parse(localStorage.user);
+        const payload = {
+          id_usuario: user.name,
+          id_gossip: this.id_gossip
         }
-      };
+        const upvotedGossips = (localStorage.upvotedGossips && JSON.parse(localStorage.upvotedGossips)) || [];
+        const downvotedGossips = (localStorage.downvotedGossips && JSON.parse(localStorage.downvotedGossips)) || [];
+        if(addToArray) downvotedGossips.push(this.id_gossip);
+        upvotedGossips.splice(upvotedGossips.indexOf(this.id_gossip), 1);
+        localStorage.downvotedGossips = JSON.stringify(downvotedGossips);
+        localStorage.upvotedGossips = JSON.stringify(upvotedGossips);
+        const XHR = new XMLHttpRequest();
+        XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/down', true);
+        let responses = 0;
 
-      XHR.setRequestHeader('Content-type', 'application/json');
-      const payload = {
-        id_usuario: user.name,
-        id_gossip: this.id_gossip
+        XHR.onload = (e) => {
+          responses++;
+          if(responses != karmaDifference) {
+            XHR.open('post', 'https://gossip-app.herokuapp.com/gossip/down', true);
+            XHR.setRequestHeader('Content-type', 'application/json');
+            XHR.send(JSON.stringify(payload));
+          }
+          else {
+            if (e.target.status == 200) {
+              this.update({
+                karma: this.karma - karmaDifference
+              });
+              resolve(e.target.response);
+            } else {
+              reject({
+                message: "Something went wrong"
+              });
+            }
+          }
+        }
+
+        XHR.setRequestHeader('Content-type', 'application/json');
+        XHR.send(JSON.stringify(payload));
+
+      } else {
+        reject({
+          message: "Already downvoted."
+        });
       }
-      XHR.send(JSON.stringify(payload));
     });
   }
 
-  remove(){
+  remove() {
     return new Promise((resolve, reject) => {
       const XHR = new XMLHttpRequest();
       let user = localStorage.user && JSON.parse(localStorage.user);
       let url = JSON.parse(window.localStorage.getItem('user')).admin ? `https://gossip-app.herokuapp.com/admin/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${user.name}` : `https://gossip-app.herokuapp.com/gossip/delete?id_gossip=${this.id_gossip}&id_usuario=${this.id_user}`;
-      XHR.open('get', url , true);
+      XHR.open('get', url, true);
       XHR.onload = (e) => {
         //TODO: Grab data from response and set it to the object
         if (e.target.status == 200) {
@@ -138,33 +192,33 @@ class Gossip {
           });
         }
       };
-      XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+      XHR.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       XHR.send();
     });
   }
 
-  recover(){
-      return new Promise((resolve, reject) => {
-        const XHR = new XMLHttpRequest();
-        let user = localStorage.user && JSON.parse(localStorage.user);
-        let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${user.name}`;
-        XHR.open('get', url , true);
-        XHR.onload = (e) => {
-          //TODO: Grab data from response and set it to the object
-          if (e.target.status == 200) {
-            this.update({
-              status: 1
-            });
-            resolve(e.target.response);
-          } else {
-            reject({
-              message: "Unable to restore",
-              response: e.target.response
-            });
-          }
-        };
-        //XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-        XHR.send();
+  recover() {
+    return new Promise((resolve, reject) => {
+      const XHR = new XMLHttpRequest();
+      let user = localStorage.user && JSON.parse(localStorage.user);
+      let url = `https://gossip-app.herokuapp.com/admin/gossip/recover?id_gossip=${this.id_gossip}&id_usuario=${user.name}`;
+      XHR.open('get', url, true);
+      XHR.onload = (e) => {
+        //TODO: Grab data from response and set it to the object
+        if (e.target.status == 200) {
+          this.update({
+            status: 1
+          });
+          resolve(e.target.response);
+        } else {
+          reject({
+            message: "Unable to restore",
+            response: e.target.response
+          });
+        }
+      };
+      //XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+      XHR.send();
     });
   }
 
@@ -178,7 +232,7 @@ class Gossip {
       if ((user.name == this.id_user || user.admin) && this.status !== 0) {
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete';
-        deleteButton.addEventListener('mouseup', () =>{
+        deleteButton.addEventListener('mouseup', () => {
           this.remove()
             .then(this.onDelete)
             .catch((e) => {
@@ -187,7 +241,7 @@ class Gossip {
         });
         gossip.insertBefore(deleteButton, gossip.querySelector('.gossip-wrapper'));
       }
-      if(user.admin && this.status === 0){
+      if (user.admin && this.status === 0) {
         // TODO: Implement recovery of gossips for admin
         const recoverButton = document.createElement('button');
         const recoverInner = document.createElement('I');
@@ -207,25 +261,33 @@ class Gossip {
     gossip.querySelector('.gossip-user').textContent = this.id_user;
     gossip.querySelector('.gossip-user').href = `/user/${this.id_user}`;
     gossip.querySelector('.gossip-description').textContent = this.description;
-    gossip.querySelector('.gossip-date').textContent = this.date.toISOString().slice(0,10);
+    gossip.querySelector('.gossip-date').textContent = this.date.toISOString().slice(0, 10);
     gossip.querySelector('.gossip-karma').textContent = this.karma;
-
+    if (this.isUpvoted()) gossip.querySelector('.positive-vote').classList.toggle('upvoted', true);
+    if (this.isDownvoted()) gossip.querySelector('.negative-vote').classList.toggle('downvoted', true);
     gossip.querySelector('.negative-vote').addEventListener('mouseup', () => {
-      //No puedo usar this porq es un nuevo contexto verdad?
-      this.down()
-        .then(this.onUpvote)
-        .catch((e) => {
-          console.log(e);
-        });
+      if (!this.isDownvoted()) {
+        this.down()
+          .then(this.onDownvote)
+          .catch((e) => console.log(e));
+      } else {
+        this.up(false)
+          .then(this.onUpvote)
+          .catch((e) => console.log(e));
+      }
     });
 
     gossip.querySelector('.positive-vote').addEventListener('mouseup', () => {
       //No puedo usar this porq es un nuevo contexto verdad?
-      this.up()
-        .then(this.onDownvote)
-        .catch((e) => {
-          console.log(e);
-        });
+      if (!this.isUpvoted()) {
+        this.up()
+          .then(this.onUpvote)
+          .catch((e) => console.log(e));
+      } else {
+        this.down(false)
+          .then(this.onDownvote)
+          .catch((e) => console.log(e));
+      }
     });
 
     return gossip;

@@ -147,9 +147,12 @@ body .gossip {
           transition: none 86ms ease-out;
           flex: 1;
           margin: auto; }
-          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button:hover,
-          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button:hover {
-            color: #363636; }
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button.upvoted,
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button.upvoted {
+            color: blue; }
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button.downvoted,
+          body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button.downvoted {
+            color: red; }
           body .gossip .gossip-wrapper .gossip-karma-wrapper .karma-wrapper button .icon,
           body .gossip .gossip-wrapper .gossip-karma-wrapper .vote-wrapper button .icon {
             width: 13px; }

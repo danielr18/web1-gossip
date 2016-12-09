@@ -225,8 +225,16 @@ body {
             color: #00d1b2;
             transition: none 86ms ease-out;
 
+            &.upvoted {
+              color: blue;
+            }
+
+            &.downvoted {
+              color: red;
+            }
+
             &:hover {
-              color: #363636;
+              // color: #363636;
             }
             flex: 1;
             margin: auto;

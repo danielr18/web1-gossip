@@ -4,10 +4,40 @@
   <% include header %>
   <section class="section home main">
     <div class="container">
-      User
+      <div class="section profile-heading">
+        <div class="columns">
+          <div class="column is-2">
+            <div class="image is-128x128 avatar">
+              <img src="https://placehold.it/256x256">
+            </div>
+          </div>
+          <div class="column is-4 name">
+            <p class="title is-bold" id="profileName"></p>
+          </div>
+          <div class="column is-2 followers has-text-centered">
+            <p class="stat-val" id="gossipsCount"></p>
+            <p class="stat-key">gossips</p>
+          </div>
+          <div class="column is-2 following has-text-centered">
+            <p class="stat-val" id="upvotesCount"></p>
+            <p class="stat-key">upvotes</p>
+          </div>
+          <div class="column is-2 likes has-text-centered">
+            <p class="stat-val" id="karmaCount"></p>
+            <p class="stat-key">karma</p>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-multiline gossips-section user-gossips" id="user-gossips"></div>
     </div>
   </section>
   <% include footer %>
   <script type="text/javascript" src="/js/components/Gossip.js"></script>
+  <script type="text/javascript" src="/js/actions/gossips.js"></script>
+  <script type="text/javascript">
+    // I can get this from location easily, but wanted to use at least something useful by EJS.
+    // const profileUser = '<%= user %>';
+  </script>
+  <script type="text/javascript" src="/js/profile.js"></script>
 </body>
 </html>

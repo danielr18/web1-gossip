@@ -24,7 +24,6 @@ searchBtn.onclick = function() {
     case 'words':
       const words = searchInput.value.split(' ').map((word) => `(^|\\s)${word}($|\\s)`).join('|');
       const regex = new RegExp(words, 'gi');
-      console.log(regex);
       matchGossips = gossips.filter((gossip) => regex.test(gossip.de_gossip));
       break;
     case 'user':

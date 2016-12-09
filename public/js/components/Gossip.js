@@ -172,7 +172,7 @@ class Gossip {
     const gossip = document.createElement('div');
     gossip.className = 'gossip notification';
     gossip.setAttribute('gossip_id', this.id_gossip);
-    gossip.innerHTML = '<div class="gossip-wrapper"> <div class="gossip-karma-wrapper"> <div class="vote-wrapper"> <button class="vote-btn positive-vote"> <span class="icon is-small"> <i class="fa fa-arrow-up"></i> </span> </button> </div> <div class="karma-wrapper"> <span class="gossip-karma"></span> </div> <div class="vote-wrapper"> <button class="vote-btn negative-vote"> <span class="icon is-small"> <i class="fa fa-arrow-down"></i> </span> </button> </div> </div> <div class="gossip-content"> <div class="gossip-header"> <p> <strong class="gossip-user"></strong> <span>-</span> <small class="gossip-date"></small> </p> </div> <div class="gossip-body"> <p class="gossip-description"></p> </div> </div> </div>';
+    gossip.innerHTML = '<div class="gossip-wrapper"> <div class="gossip-karma-wrapper"> <div class="vote-wrapper"> <button class="vote-btn positive-vote"> <span class="icon is-small"> <i class="fa fa-arrow-up"></i> </span> </button> </div> <div class="karma-wrapper"> <span class="gossip-karma"></span> </div> <div class="vote-wrapper"> <button class="vote-btn negative-vote"> <span class="icon is-small"> <i class="fa fa-arrow-down"></i> </span> </button> </div> </div> <div class="gossip-content"> <div class="gossip-header"> <p> <strong><a class="gossip-user"></a></strong> <span>-</span> <small class="gossip-date"></small> </p> </div> <div class="gossip-body"> <p class="gossip-description"></p> </div> </div> </div>';
     if (localStorage.user) {
       user = JSON.parse(localStorage.user);
       if ((user.name == this.id_user || user.admin) && this.status !== 0) {
@@ -205,6 +205,7 @@ class Gossip {
       }
     }
     gossip.querySelector('.gossip-user').textContent = this.id_user;
+    gossip.querySelector('.gossip-user').href = `/user/${this.id_user}`;
     gossip.querySelector('.gossip-description').textContent = this.description;
     gossip.querySelector('.gossip-date').textContent = this.date.toISOString().slice(0,10);
     gossip.querySelector('.gossip-karma').textContent = this.karma;

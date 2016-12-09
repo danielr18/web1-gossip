@@ -1,5 +1,5 @@
 function filterByPublicStatus(gossip) {
-  return parseInt(gossip.id_gossip_status) === 1;
+  return gossip.id_gossip_status === 1;
 }
 
 function filterByDeleted(gossip) {

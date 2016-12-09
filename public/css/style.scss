@@ -63,7 +63,7 @@ body {
       margin: 0 auto;
     }
 
-    .search-gossips {
+    .search-gossips, .user-gossips {
       padding: 10px;
 
       .gossip {
@@ -249,4 +249,36 @@ body {
       }
     }
   }
+}
+
+
+.profile-heading {
+  margin: 20px 0;
+  padding-bottom: 30px;
+
+  #profileName {
+    margin-top: 53px;
+  }
+}
+.profile-heading .name {
+  border-right: 1px solid #f1f1f1;
+  margin:-30px 0;
+  padding: 40px 30px 0 30px;
+}
+.profile-heading .followers, .profile-heading .following {
+  border-right: 1px solid #f1f1f1;
+  margin:-30px 0;
+  padding: 70px 30px;
+}
+.profile-heading .likes {
+  margin:-30px 0;
+  padding: 70px 30px;
+}
+.profile-heading .stat-key {
+  font-size: 20px;
+  font-weight: 200;
+}
+.profile-heading .stat-val {
+  font-size: 35px;
+  font-weight: bold;
 }
